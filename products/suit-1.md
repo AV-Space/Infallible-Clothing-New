@@ -1,7 +1,7 @@
 ---
 title: Suit 1
-category: Indian Suits
+category: Sarees
 price: "1000"
-image: /images/uploads/jaa25cd01289-825-.jpg
+image: /images/uploads/jaa25kb02101-765-.jpg
 description: Suit
 ---
