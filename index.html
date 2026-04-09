@@ -23,24 +23,40 @@
 </section>
 
 <section id="products" class="products">
-  <div class="product-card">
-    <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b" alt="Dress">
-    <h3>Elegant Saree</h3>
-    <p>₹2499</p>
-  </div>
-
-  <div class="product-card">
-    <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c" alt="Dress">
-    <h3>Western Dress</h3>
-    <p>₹1899</p>
-  </div>
-
-  <div class="product-card">
-    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f" alt="Dress">
-    <h3>Designer Kurta</h3>
-    <p>₹1599</p>
-  </div>
+  <h2>Products</h2>
+  <div id="product-list"></div>
 </section>
+
+<script>
+async function loadProducts() {
+  const productFolder = [
+    "suit-1.md"
+  ];
+
+  const container = document.getElementById("product-list");
+
+  for (const file of productFolder) {
+    const response = await fetch(`/products/${file}`);
+    const text = await response.text();
+
+    const title = text.match(/title:\s*"?([^"\n]+)"?/)[1];
+    const category = text.match(/category:\s*"?([^"\n]+)"?/)[1];
+    const price = text.match(/price:\s*"?([^"\n]+)"?/)[1];
+    const image = text.match(/image:\s*"?([^"\n]+)"?/)[1];
+
+    container.innerHTML += `
+      <div class="product-card">
+        <img src="${image}" alt="${title}">
+        <h3>${title}</h3>
+        <p>${category}</p>
+        <p>₹${price}</p>
+      </div>
+    `;
+  }
+}
+
+loadProducts();
+</script>
 
 <section id="about" class="about">
   <h2>About INFALLIBLE</h2>
